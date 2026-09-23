@@ -1,0 +1,8 @@
+# dsh-client-ui-session-pin bundle patch: mount the session-pin client plugin
+# into the web composition. Host and client halves are resolved by the
+# official bundle flow from package.json's `dsh` manifest — no manual dual
+# entry. Install with:
+#   dsh plugin --profile web add github:Wzh0718/dsh-client-ui-session-pin
+- insert:
+    - id: ui-session-pin
+      name: '@deepseek-ai/dsh-client-ui-session-pin'

@@ -33,26 +33,26 @@ Currently that means running the GUI from [Wzh0718/deepseek-harness](https://git
 ## Install
 
 ```sh
-./scripts/install.sh
+dsh plugin --profile web add github:Wzh0718/dsh-client-ui-session-pin
 ```
 
-The script copies this package into `$DSH_HOME/profiles/node_modules/` (default `~/.dsh/profiles/node_modules/`) and, if absent, appends one `insert` row for it to `$DSH_HOME/profiles/web/cordis.patch.yml`. Then restart `dsh web` (or refresh the page if the server already serves your build).
+That's all. The repo ships prebuilt `lib/`, so nothing compiles at install time. The command pnpm-installs the package into `$DSH_HOME/profiles/web/` (default `~/.dsh/profiles/web/`), syncs the profile's `dsh.profile.bundles` list, and on the next boot the bundle's `cordis.patch.yml` mounts the plugin. Restart `dsh web` (or refresh the page) to load it.
 
-Manual equivalent:
+Pin a tag or branch by appending `#v0.1.0` / `#branch` to the spec. To uninstall:
 
 ```sh
-mkdir -p ~/.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-session-pin
-cp package.json ~/.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-session-pin/
-cp -r lib ~/.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-session-pin/
-# append to ~/.dsh/profiles/web/cordis.patch.yml:
-#   - insert:
-#       - id: ui-session-pin
-#         name: '@deepseek-ai/dsh-client-ui-session-pin'
+dsh plugin --profile web remove @deepseek-ai/dsh-client-ui-session-pin
 ```
+
+`scripts/install.sh` remains as a manual, offline fallback (copies the package into the profile's healed `node_modules` and appends the insert row to the profile's `cordis.patch.yml`).
 
 ## Uninstall
 
-Remove the `ui-session-pin` insert row from `~/.dsh/profiles/web/cordis.patch.yml`, delete `~/.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-session-pin/`, and refresh. Both extension holes render empty; nothing else changes.
+```sh
+dsh plugin --profile web remove @deepseek-ai/dsh-client-ui-session-pin
+```
+
+Both extension holes render empty; nothing else changes.
 
 ## Build from source
 

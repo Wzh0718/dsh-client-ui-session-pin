@@ -33,26 +33,26 @@
 ## 安装
 
 ```sh
-./scripts/install.sh
+dsh plugin --profile web add github:Wzh0718/dsh-client-ui-session-pin
 ```
 
-脚本会把本包复制到 `$DSH_HOME/profiles/node_modules/`(默认 `~/.dsh/profiles/node_modules/`),并在 `$DSH_HOME/profiles/web/cordis.patch.yml` 中(如尚无)追加一条本插件的 `insert` 行。然后重启 `dsh web`(若服务器已在运行你的构建,刷新页面即可)。
+一条命令即可。仓库已随附预构建的 `lib/`,安装时无需任何编译。该命令会把包 pnpm 安装到 `$DSH_HOME/profiles/web/`(默认 `~/.dsh/profiles/web/`)、同步 profile 的 `dsh.profile.bundles` 列表,下次启动时由 bundle 自带的 `cordis.patch.yml` 挂载插件。重启 `dsh web`(或刷新页面)即可加载。
 
-手动等价步骤:
+需要锁定版本时在 spec 后追加 `#v0.1.0` 或 `#分支名`。卸载:
 
 ```sh
-mkdir -p ~/.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-session-pin
-cp package.json ~/.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-session-pin/
-cp -r lib ~/.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-session-pin/
-# 追加到 ~/.dsh/profiles/web/cordis.patch.yml:
-#   - insert:
-#       - id: ui-session-pin
-#         name: '@deepseek-ai/dsh-client-ui-session-pin'
+dsh plugin --profile web remove @deepseek-ai/dsh-client-ui-session-pin
 ```
+
+`scripts/install.sh` 保留为手工/离线回退方案(把包复制进 profile 的 healed `node_modules`,并向 profile 的 `cordis.patch.yml` 追加 insert 行)。
 
 ## 卸载
 
-从 `~/.dsh/profiles/web/cordis.patch.yml` 移除 `ui-session-pin` 的 insert 行,删除 `~/.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-session-pin/`,刷新页面。两个扩展 slot 渲染为空,其余不变。
+```sh
+dsh plugin --profile web remove @deepseek-ai/dsh-client-ui-session-pin
+```
+
+两个扩展 slot 渲染为空,其余不变。
 
 ## 从源码构建
 
