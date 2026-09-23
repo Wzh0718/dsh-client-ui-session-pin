@@ -1,0 +1,128 @@
+.pinnedSection {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  margin: 0 8px 4px;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 8px;
+  user-select: none;
+}
+
+.headerIcon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.headerTitle {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--dsw-alias-label-primary);
+}
+
+.collapseButton,
+.followButton,
+.unpinButton,
+.pinButton {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.collapseButton:hover,
+.followButton:hover,
+.unpinButton:hover,
+.pinButton:hover {
+  color: var(--dsw-alias-label-primary);
+}
+
+.chevron {
+  transition: transform var(--ds-transition-duration-fast) var(--ds-ease-in-out);
+}
+
+.collapsed {
+  transform: rotate(-90deg);
+}
+
+.followActive {
+  color: var(--dsw-alias-label-primary-bluish);
+}
+
+.empty {
+  padding: 4px 8px 6px 30px;
+  font-size: 12px;
+  line-height: 17px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.pinnedRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  border-radius: 8px;
+  padding: 0 8px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--dsw-alias-label-primary);
+}
+
+.pinnedRow:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+.rowTitle {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.rowWorkspace {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  font-size: 12px;
+  line-height: 17px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.unpinButton {
+  visibility: hidden;
+}
+
+.pinnedRow:hover .unpinButton,
+.pinnedRow:focus-within .unpinButton {
+  visibility: visible;
+}
