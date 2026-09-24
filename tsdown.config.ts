@@ -109,7 +109,10 @@ const clientConfig = defineConfig({
     banner: (chunk) => chunk.name === 'client'
       ? `window.__ModuleLoader__.load({\n\tid: ${JSON.stringify(ID)},\n\tfactory: (require) => {`
       : '',
-    footer: (chunk) => chunk.name === 'client' ? '}\n});' : '',
+    intro: (chunk) => chunk.name === 'client'
+      ? 'var module = { exports: {} }; var exports = module.exports;'
+      : '',
+    footer: (chunk) => chunk.name === 'client' ? 'return module.exports;\n}\n});' : '',
   },
 })
 
